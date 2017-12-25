@@ -160,6 +160,10 @@ class CRM_Utils_Mail_EmailProcessor {
     $regex = '/^' . preg_quote($dao->localpart) . '(b|c|e|o|r|u)' . $twoDigitString . '([0-9a-f]{16})@' . preg_quote($dao->domain) . '$/';
 
     // a tighter regex for finding bounce info in soft bounces’ mail bodies
+    
+    // EMS My fix of the bug is here
+    // See http://emanuelesantanche.com/bounce-processing-when-smtp-server-doesnt-return-bounces-properly/
+    //$rpRegex = '/Return-Path: ' . preg_quote($dao-&gt;localpart) . '(b)' . $twoDigitString . '([0-9a-f]{16})@' . preg_quote($dao-&gt;domain) . '/';
     $rpRegex = '/Return-Path:\s*' . preg_quote($dao->localpart) . '(b)' . $twoDigitString . '([0-9a-f]{16})@' . preg_quote($dao->domain) . '/';
 
     // a regex for finding bound info X-Header
